@@ -17,7 +17,7 @@ const LoginCallback = () => {
 
       const { token } = await response.json()
       login(token)
-      history.push('/myInfo')
+      history.replace('/myInfo')
     }
 
     sendCodeToServer()

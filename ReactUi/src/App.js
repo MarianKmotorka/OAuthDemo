@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import TopNavigation from './components/TopNavigation'
 import Home from './components/Home'
-import Login from './containers/Login.jsx'
-import Logout from './containers/Logout.jsx'
-import LoginCallback from './containers/LoginCallback'
-import MyInfo from './containers/MyInfo'
+import Login from './components/Login.jsx'
+import Logout from './components/Logout.jsx'
+import LoginCallback from './components/LoginCallback'
+import MyInfo from './components/MyInfo'
 
 const About = () => (
   <div>

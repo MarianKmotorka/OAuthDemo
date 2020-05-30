@@ -20,6 +20,8 @@ const MyInfo = () => {
   }, [])
 
   const uploadImage = async ({ target: { files } }) => {
+    if (!files[0]) return
+
     const data = new FormData()
     data.append('image', files[0])
 
@@ -48,7 +50,24 @@ const MyInfo = () => {
         src={data.picture}
         alt='User'
       />
-      <input type='file' style={{ display: 'block' }} onChange={uploadImage} />
+      <input
+        type='file'
+        id='image-upload-input'
+        style={{ display: 'none' }}
+        onChange={uploadImage}
+      />
+      <button
+        onClick={() => document.getElementById('image-upload-input').click()}
+        style={{
+          border: 'none',
+          borderRadius: 6,
+          background: 'orange',
+          padding: 8,
+          display: 'block'
+        }}
+      >
+        Upload photo
+      </button>
       <div>Email: {data.email}</div>
       <div>Name: {data.name}</div>
     </>
