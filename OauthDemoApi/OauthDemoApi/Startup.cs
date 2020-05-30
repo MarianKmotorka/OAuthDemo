@@ -42,11 +42,15 @@ namespace OauthDemoApi
                     .AllowAnyHeader();
                 });
             }
+            else
+                app.UseHsts();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseStaticFiles();
 
             app.UseEndpoints(cfg =>
             {

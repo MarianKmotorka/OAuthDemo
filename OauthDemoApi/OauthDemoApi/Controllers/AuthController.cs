@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -69,24 +67,8 @@ namespace OauthDemoApi.Controllers
             return Ok(new { Token = jwt });
         }
 
-        [Authorize]
-        [HttpGet("my-info")]
-        public async Task<ActionResult> GetProtected()
-        {
-            var userId = _httpContextAccessor.HttpContext.User.Claims.Single(x => x.Type == ClaimTypes.NameIdentifier).Value;
-            var user = await _db.Users.SingleAsync(x => x.Id == userId);
-
-            return Ok(new
-            {
-                user.Email,
-                user.Name,
-                Picture = user.PictureUrl
-            });
-        }
-
         private async Task<string> CreateJwt(GoogleUserInfoModel model)
         {
-
             var userDbId = await RegisterIfNotAlready(model);
 
             var tokenHandler = new JwtSecurityTokenHandler();
