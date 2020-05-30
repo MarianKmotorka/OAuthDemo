@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -24,16 +23,14 @@ namespace OauthDemoApi.Controllers
         private readonly Db _db;
         private readonly OAuthOptions _oAuthOptions;
         private readonly JwtOptions _jwtOptions;
-        private readonly IHttpContextAccessor _httpContextAccessor;
         private HttpClient _httpClient;
 
         public AuthController(Db db, OAuthOptions oAuthOptions, JwtOptions jwtOptions,
-            IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor)
+            IHttpClientFactory httpClientFactory)
         {
             _db = db;
             _oAuthOptions = oAuthOptions;
             _jwtOptions = jwtOptions;
-            _httpContextAccessor = httpContextAccessor;
             _httpClient = httpClientFactory.CreateClient();
         }
 
