@@ -21,11 +21,11 @@ namespace OauthDemoApi.Controllers
     public class AuthController : ControllerBase
     {
         private readonly Db _db;
-        private readonly OAuthOptions _oAuthOptions;
+        private readonly GoogleOAuthOptions _oAuthOptions;
         private readonly JwtOptions _jwtOptions;
         private HttpClient _httpClient;
 
-        public AuthController(Db db, OAuthOptions oAuthOptions, JwtOptions jwtOptions,
+        public AuthController(Db db, GoogleOAuthOptions oAuthOptions, JwtOptions jwtOptions,
             IHttpClientFactory httpClientFactory)
         {
             _db = db;
@@ -43,11 +43,14 @@ namespace OauthDemoApi.Controllers
                 client_id = _oAuthOptions.GoogleClientId,
                 client_secret = _oAuthOptions.GoogleClientSecret,
                 grant_type = "authorization_code",
-                redirect_uri = "http://localhost:3000/google-login-callback"
+                redirect_uri = _oAuthOptions.ClientRedirectUri
             };
 
             var response = await _httpClient.PostAsJsonAsync(_oAuthOptions.TokenEndpoint, request);
             var authResponse = await response.Content.ReadAsAsync<GoogleAuthResponse>();
+
+            if (!response.IsSuccessStatusCode)
+                return BadRequest("Invalid code");
 
             var userInfoRequest = new HttpRequestMessage()
             {

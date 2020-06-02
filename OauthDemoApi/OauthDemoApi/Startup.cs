@@ -26,7 +26,6 @@ namespace OauthDemoApi
             services.AddDbContext<Db>(o =>
                 o.UseSqlServer(Configuration.GetConnectionString("OAuthDemoDb")));
 
-
             services.AddControllers();
         }
 
@@ -49,8 +48,6 @@ namespace OauthDemoApi
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseStaticFiles();
 
             app.UseEndpoints(cfg =>
             {

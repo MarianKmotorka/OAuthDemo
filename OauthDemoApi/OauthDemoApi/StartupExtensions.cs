@@ -16,8 +16,8 @@ namespace OauthDemoApi
             configuration.GetSection(nameof(JwtOptions)).Bind(jwtOptions);
             services.AddSingleton(jwtOptions);
 
-            var oAuthOptions = new OAuthOptions();
-            configuration.GetSection(nameof(OAuthOptions)).Bind(oAuthOptions);
+            var oAuthOptions = new GoogleOAuthOptions();
+            configuration.GetSection(nameof(GoogleOAuthOptions)).Bind(oAuthOptions);
             services.AddSingleton(oAuthOptions);
 
             services.AddAuthentication(o =>

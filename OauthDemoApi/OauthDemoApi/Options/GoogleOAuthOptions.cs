@@ -1,6 +1,6 @@
 ﻿namespace OauthDemoApi.Options
 {
-    public class OAuthOptions
+    public class GoogleOAuthOptions
     {
         public string GoogleClientId { get; set; }
 
@@ -10,5 +10,6 @@
 
         public string TokenEndpoint { get; set; }
 
+        public string ClientRedirectUri { get; set; }
     }
 }
