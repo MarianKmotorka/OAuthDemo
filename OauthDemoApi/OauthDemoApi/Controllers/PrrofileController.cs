@@ -82,7 +82,7 @@ namespace OauthDemoApi.Controllers
 
         private void DeleteImages(string userId, string folderPath)
         {
-            var images = Directory.GetFiles(folderPath).Where(x => Path.GetFileName(x).StartsWith(userId) || x.Contains("XXXX")).ToList();
+            var images = Directory.GetFiles(folderPath).Where(x => Path.GetFileName(x).StartsWith(userId)).ToList();
 
             foreach (var image in images)
                 System.IO.File.Delete(image);
