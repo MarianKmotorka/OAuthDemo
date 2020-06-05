@@ -375,3 +375,5 @@ yarn-error.log*
 /ReactUi/npm-debug.log*
 /ReactUi/yarn-debug.log*
 /ReactUi/yarn-error.log*
+
+/OauthDemoApi/OauthDemoApi/Resources/*
