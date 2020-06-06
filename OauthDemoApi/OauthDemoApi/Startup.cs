@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,13 @@ namespace OauthDemoApi
             services.AddJwtAuthentication(Configuration);
             services.AddHttpClient();
             services.AddHttpContextAccessor();
+
+            services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.ApiVersionSelector = new LowestImplementedApiVersionSelector(options);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+            });
 
             services.AddDbContext<Db>(o =>
                 o.UseSqlServer(Configuration.GetConnectionString("OAuthDemoDb")));

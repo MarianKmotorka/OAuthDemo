@@ -14,13 +14,13 @@ namespace OauthDemoApi.Controllers
     [ApiController]
     [Authorize]
     [Route("api/profile")]
-    public class PrrofileController : ControllerBase
+    public class ProfileController : ControllerBase
     {
         private readonly Db _db;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IWebHostEnvironment _env;
 
-        public PrrofileController(Db db, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env)
+        public ProfileController(Db db, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env)
         {
             _db = db;
             _httpContextAccessor = httpContextAccessor;
