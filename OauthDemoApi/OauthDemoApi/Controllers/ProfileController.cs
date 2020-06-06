@@ -37,6 +37,8 @@ namespace OauthDemoApi.Controllers
             var user = await _db.Users.FindAsync(userId);
 
             var folderPath = Path.Combine(_env.ContentRootPath, "Resources");
+            Directory.CreateDirectory(folderPath);
+
             DeleteImages(userId, folderPath);
 
             var imageName = $"{userId}_{image.FileName}";
