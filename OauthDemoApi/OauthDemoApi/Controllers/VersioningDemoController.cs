@@ -14,16 +14,16 @@ namespace OauthDemoApi.Controllers
             return "V1 - V1.1 OLDEST content";
         }
 
-        [ApiVersions(Versions.V2, Versions.V2_1)]
-        public string Get_V2_1()
+        [ApiVersions(Versions.V2, Versions.V2_2)]
+        public string Get_V2_2()
         {
-            return "V2 - V2.1 content";
+            return "V2 - V2.2 content";
         }
 
-        [ApiVersions(Versions.V2_2)]
+        [ApiVersions(Versions.V2_3)]
         public string Get()
         {
-            return "V2.2+ NEWEST content";
+            return "V2.3+ NEWEST content";
         }
     }
 }
