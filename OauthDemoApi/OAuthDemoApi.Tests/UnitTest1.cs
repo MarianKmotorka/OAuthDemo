@@ -9,11 +9,5 @@ namespace OAuthDemoApi.Tests
         {
             Assert.True(true);
         }
-
-        [Fact]
-        public void IsFalse()
-        {
-            Assert.True(false);
-        }
     }
 }
