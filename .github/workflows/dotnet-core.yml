@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
         
-    - run: cd OAuthDemoApi
+    - run: cd OauthDemoApi
     - name: Install dependencies
       run: dotnet restore
     - name: Build
