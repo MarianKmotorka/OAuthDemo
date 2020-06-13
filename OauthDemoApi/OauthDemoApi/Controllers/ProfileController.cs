@@ -41,7 +41,7 @@ namespace OauthDemoApi.Controllers
 
             DeleteImages(userId, folderPath);
 
-            var imageName = $"{userId}_{image.FileName}";
+            var imageName = $"{userId}_{image.FileName.Replace('\\', '_')}"; // Edge browser fileName fix
             var imagePath = Path.Combine(folderPath, imageName);
 
             using var fileStream = new FileStream(imagePath, FileMode.Create);
@@ -68,11 +68,22 @@ namespace OauthDemoApi.Controllers
                 });
 
             var imagePath = Path.Combine(_env.ContentRootPath, "Resources", user.PictureUrl);
-            var image = System.IO.File.OpenRead(imagePath);
+
+            FileStream imageStream;
+
+            try
+            {
+                imageStream = System.IO.File.OpenRead(imagePath);
+            }
+            catch (Exception)
+            {
+                return Ok(new { user.Email, user.Name, Picture = "https://images.app.goo.gl/qLNhL5F3CeYge8mSA" });
+            }
+
             var extension = Path.GetExtension(imagePath);
 
-            using var binaryReader = new BinaryReader(image);
-            var imageBytes = binaryReader.ReadBytes((int)image.Length);
+            using var binaryReader = new BinaryReader(imageStream);
+            var imageBytes = binaryReader.ReadBytes((int)imageStream.Length);
 
             return Ok(new
             {

@@ -6,12 +6,7 @@ import Login from './components/Login.jsx'
 import Logout from './components/Logout.jsx'
 import LoginCallback from './components/LoginCallback'
 import MyInfo from './components/MyInfo'
-
-const About = () => (
-  <div>
-    <h1>About</h1>
-  </div>
-)
+import Chat from './components/Chat'
 
 const NotFound = () => (
   <div>
@@ -27,7 +22,7 @@ class App extends Component {
         <main role='main' className='container'>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/about' component={About} />
+            <Route path='/chat' component={Chat} />
             <Route path='/google-login-callback' component={LoginCallback} />
             <Route path='/login' component={Login} />
             <Route path='/logout' component={Logout} />

@@ -17,7 +17,7 @@ const TopNavigation = () => {
   }
   return (
     <div>
-      <nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
+      <nav className='navbar navbar-expand navbar-dark fixed-top bg-dark'>
         <a className='navbar-brand' href='/'>
           Zigot App
         </a>
@@ -29,8 +29,8 @@ const TopNavigation = () => {
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink exact className='nav-link' to='/about'>
-                Bing{' '}
+              <NavLink exact className='nav-link' to='/chat'>
+                Chat{' '}
               </NavLink>
             </li>
             <li className='nav-item'>

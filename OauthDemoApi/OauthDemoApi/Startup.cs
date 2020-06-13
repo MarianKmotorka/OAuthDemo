@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OauthDemoApi.Hubs;
 using OauthDemoApi.Persistance;
 
 namespace OauthDemoApi
@@ -35,6 +36,7 @@ namespace OauthDemoApi
                 o.UseSqlServer(Configuration.GetConnectionString("OAuthDemoDb")));
 
             services.AddControllers();
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -59,6 +61,7 @@ namespace OauthDemoApi
 
             app.UseEndpoints(cfg =>
             {
+                cfg.MapHub<ChatHub>("api/chat");
                 cfg.MapControllers();
             });
         }
