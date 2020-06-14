@@ -5,41 +5,40 @@ import {
   LogLevel,
   HttpTransportType
 } from '@aspnet/signalr'
+import { getToken } from '../services/authService'
 
 const Chat = () => {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
-  const [nick, setNick] = useState('')
   const [hubConnection, setHubConnection] = useState(null)
 
   useEffect(() => {
-    const nick = window.prompt('Your name:', 'John')
-    setNick(nick)
-
     const connection = new HubConnectionBuilder()
       .withUrl('https://localhost:5001/api/chat', {
         skipNegotiation: true,
-        transport: HttpTransportType.WebSockets
+        transport: HttpTransportType.WebSockets,
+        accessTokenFactory: getToken
       })
       .configureLogging(LogLevel.Information)
       .build()
+
+    setHubConnection(connection)
 
     connection.on('ReceiveMessage', (nick, receivedMessage) => {
       const text = `${nick}: ${receivedMessage}`
       setMessages(prev => [...prev, text])
     })
-
-    setHubConnection(connection)
-
-    connection
-      .start()
-      .then(() => console.log('Connection started!'))
-      .catch(err => console.log('Error while establishing connection :('))
   }, [])
+
+  useEffect(() => {
+    if (!hubConnection) return
+
+    hubConnection.start().catch(console.log)
+  }, [hubConnection])
 
   const sendMessage = () => {
     hubConnection
-      .invoke('SendMessage', nick, message)
+      .invoke('SendMessage', message)
       .catch(err => console.error(err))
 
     setMessage('')

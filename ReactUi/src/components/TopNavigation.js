@@ -28,11 +28,13 @@ const TopNavigation = () => {
                 Fene{' '}
               </NavLink>
             </li>
-            <li className='nav-item'>
-              <NavLink exact className='nav-link' to='/chat'>
-                Chat{' '}
-              </NavLink>
-            </li>
+            {isLoggedIn && (
+              <li className='nav-item'>
+                <NavLink exact className='nav-link' to='/chat'>
+                  Chat{' '}
+                </NavLink>
+              </li>
+            )}
             <li className='nav-item'>
               <NavLink exact className='nav-link' to={loginLink}>
                 {loginText}{' '}
